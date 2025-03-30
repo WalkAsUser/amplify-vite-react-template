@@ -44,7 +44,7 @@ const schema = a.schema({
         invoiceId: a.id(),
         invoiceNumber: a.integer().required(),
         invoiceStatus: a.enum(["Estimate","Paid","Outstanding"]),
-        customer: a.hasOne('Customer', 'customerId'),
+       // customer: a.hasOne('Customer', 'customerId'),
 
     }).authorization(allow => [
         allow.owner(),
