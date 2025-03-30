@@ -17,6 +17,8 @@ const schema = a.schema({
             allow.owner(),
             allow.groupDefinedIn('group'),
         ]),
+
+    ///USERS TABLE- No Edit from USER ///
     DWUser: a.model({
         firstName: a.string(),
         lastName: a.string(),
@@ -29,9 +31,26 @@ const schema = a.schema({
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
-    Invoice: a.model({
 
-    })
+    ///INVOICE TABLE///
+    Invoice: a.model({
+        invoiceId: a.id(),
+        invoiceNumber: a.integer().required(),
+        invoiceStatus: a.enum(["Estimate","Paid","Outstanding"]),
+        customer: a.hasOne('Customer', 'customerId'),
+
+    }).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
+
+    ///CUSTOMERS TABLE///
+    Customer: a.model({
+        customerId: a.id(),
+    }).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
 
 });
 
