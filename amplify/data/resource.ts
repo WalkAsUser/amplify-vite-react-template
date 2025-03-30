@@ -28,7 +28,10 @@ const schema = a.schema({
         groupName: a.string(),
     }).authorization(allow => [
         allow.owner().to(['read']),
-    ])
+    ]),
+    Invoice: a.model({
+
+    })
 
 });
 

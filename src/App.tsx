@@ -19,7 +19,6 @@ function App() {
       client.models.Todo.create({
           content: window.prompt("Todo content"),
           isDone: false,
-          lastUpdate: new Date().toISOString(),
       });
   }
 
