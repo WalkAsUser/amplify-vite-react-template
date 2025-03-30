@@ -25,8 +25,11 @@ const schema = a.schema({
         lastLogin: a.datetime(),
         dateCreated: a.datetime(),
         expires: a.datetime(),
-        group: a.string(),
-    })
+        groupName: a.string(),
+    }).authorization(allow => [
+        allow.owner().to(['read']),
+    ])
+
 });
 
 export type Schema = ClientSchema<typeof schema>;
