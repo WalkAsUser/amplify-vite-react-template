@@ -12,7 +12,7 @@ const schema = a.schema({
             content: a.string(),
             isDone: a.boolean(),
             group: a.string(),
-            lastUpdate: a.datetime()
+            // This is built in lastUpdate: a.datetime()
         }).authorization(allow => [
             allow.owner(),
             allow.groupDefinedIn('group'),
