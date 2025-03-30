@@ -31,6 +31,13 @@ const schema = a.schema({
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
+    ///CUSTOMERS TABLE///
+    Customer: a.model({
+        customerId: a.id(),
+    }).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
 
     ///INVOICE TABLE///
     Invoice: a.model({
@@ -44,13 +51,7 @@ const schema = a.schema({
         allow.groupDefinedIn('group'),
     ]),
 
-    ///CUSTOMERS TABLE///
-    Customer: a.model({
-        customerId: a.id(),
-    }).authorization(allow => [
-        allow.owner(),
-        allow.groupDefinedIn('group'),
-    ]),
+
 
 });
 
