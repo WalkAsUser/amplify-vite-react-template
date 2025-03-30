@@ -12,10 +12,21 @@ const schema = a.schema({
             content: a.string(),
             isDone: a.boolean(),
             group: a.string(),
+            lastUpdate: a.datetime()
         }).authorization(allow => [
             allow.owner(),
             allow.groupDefinedIn('group'),
         ]),
+    DWUser: a.model({
+        firstName: a.string(),
+        lastName: a.string(),
+        email: a.string(),
+        enabled: a.boolean(),
+        lastLogin: a.datetime(),
+        dateCreated: a.datetime(),
+        expires: a.datetime(),
+        group: a.string(),
+    })
 });
 
 export type Schema = ClientSchema<typeof schema>;

@@ -16,7 +16,11 @@ function App() {
   }, []);
 
   function createTodo() {
-    client.models.Todo.create({ content: window.prompt("Todo content") });
+      client.models.Todo.create({
+          content: window.prompt("Todo content"),
+          isDone: false,
+          lastUpdate: new Date().toISOString(),
+      });
   }
 
   function deleteTodo(id: string) {
