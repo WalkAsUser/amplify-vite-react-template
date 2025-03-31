@@ -53,12 +53,12 @@ const schema = a.schema({
     ]),
 ///Trying to change the ID field///
     TestForId: a.model({
-        testForId: a.id().required(),
+        testForId: a.id(),
         shootForTheMoon: a.string(),
-    }).identifier(["testForId"])
+    })//.identifier(["testForId"])
         .authorization(allow => [
             allow.owner(),
-            allow.groupDefinedIn('group'),
+            //allow.groupDefinedIn('group'),
         ]),
 
 ///***///
