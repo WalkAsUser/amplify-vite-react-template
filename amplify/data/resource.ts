@@ -33,7 +33,8 @@ const schema = a.schema({
     ]),
     ///CUSTOMERS TABLE///
     Customer: a.model({
-        invoices : a.hasMany('Invoice','id')
+        customerId: a.id(),
+        invoices : a.hasMany('Invoice','invoiceId')
     }).authorization(allow => [
         allow.owner(),
         allow.groupDefinedIn('group'),
@@ -41,10 +42,10 @@ const schema = a.schema({
 
     ///INVOICE TABLE///
     Invoice: a.model({
-        customer: a.belongsTo('Customer', 'id'),
+        invoiceId: a.id(),
+        customer: a.belongsTo('Customer', 'invoiceId'),
         invoiceNumber: a.integer().required(),
         invoiceStatus: a.enum(["Estimate","Paid","Outstanding"]),
-
 
     }).authorization(allow => [
         allow.owner(),
