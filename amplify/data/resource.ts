@@ -50,6 +50,12 @@ const schema = a.schema({
         allow.owner(),
         allow.groupDefinedIn('group'),
     ]),
+    TestForId: a.model({
+        testForId: a.id().required(),
+    }).identifier(["testForId"]).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
 
 
 
