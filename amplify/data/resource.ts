@@ -51,14 +51,17 @@ const schema = a.schema({
         allow.owner(),
         allow.groupDefinedIn('group'),
     ]),
+///Trying to change the ID field///
     TestForId: a.model({
         testForId: a.id().required(),
-    }).identifier(["testForId"]).authorization(allow => [
-        allow.owner(),
-        allow.groupDefinedIn('group'),
-    ]),
+        shootForTheMoon: a.string(),
+    }).identifier(["testForId"])
+        .authorization(allow => [
+            allow.owner(),
+            allow.groupDefinedIn('group'),
+        ]),
 
-
+///***///
 
 });
 
