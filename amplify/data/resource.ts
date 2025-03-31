@@ -42,6 +42,7 @@ const schema = a.schema({
 
     ///INVOICE TABLE///
     Invoice: a.model({
+        id: a.id().required(),
         invoiceId: a.id(),
         customer: a.belongsTo('Customer', 'invoiceId'),
         invoiceNumber: a.integer().required(),
@@ -53,7 +54,7 @@ const schema = a.schema({
     ]),
 ///Trying to change the ID field///
     TestForId: a.model({
-        testForId: a.id(),
+        testForId: a.id().required().default(),
         shootForTheMoon: a.string(),
     })//.identifier(["testForId"])
         .authorization(allow => [

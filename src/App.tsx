@@ -22,12 +22,7 @@ function App() {
           isDone: false,
       })
   }
-    function createTestThing() {
-        client.models.TestForId.create({
 
-            shootForTheMoon: 'work',
-        })
-    }
 
 
   function deleteTodo(id: string) {
@@ -41,7 +36,7 @@ function App() {
         <h2>{user?.userId}</h2>
 
       <button onClick={createTodo}>+ new</button>
-      <button onClick={createTestThing}>TheButton</button>
+
       <ul>
         {todos.map((todo) => (
           <li
