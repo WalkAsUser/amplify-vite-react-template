@@ -20,7 +20,7 @@ const schema = a.schema({
 
     ///USERS TABLE- No Edit from USER ///
     DWUser: a.model({
-        dwUserId: a.id().required(),
+        dwUserId: a.id(),
         firstName: a.string(),
         lastName: a.string(),
         email: a.string(),
@@ -40,7 +40,7 @@ const schema = a.schema({
         customerId: a.id(),
         dwUserId: a.id(),
         //RELATIONSHIPS//
-        dwUser: a.hasOne('DWUser','dwUserId'),
+        dwUser: a.belongsTo('DWUser','dwUserId'),
         invoices : a.hasMany('Invoice','invoiceId'),
     }).authorization(allow => [
         allow.owner(),
