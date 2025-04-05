@@ -34,15 +34,14 @@ const schema = a.schema({
     ///CUSTOMERS TABLE///
     Customer: a.model({
         customerId: a.id(),
-        invoices : a.hasMany('Invoice','invoiceId')
+        invoices : a.hasMany('Invoice','invoiceId'),
     }).authorization(allow => [
         allow.owner(),
-        allow.groupDefinedIn('group'),
+        //allow.groupDefinedIn('group'),
     ]),
 
     ///INVOICE TABLE///
     Invoice: a.model({
-        id: a.id().required(),
         invoiceId: a.id(),
         customer: a.belongsTo('Customer', 'invoiceId'),
         invoiceNumber: a.integer().required(),
@@ -54,7 +53,7 @@ const schema = a.schema({
     ]),
 ///Trying to change the ID field///
     TestForId: a.model({
-        testForId: a.id().required().default(),
+        testForId: a.id().required(),
         shootForTheMoon: a.string(),
     })//.identifier(["testForId"])
         .authorization(allow => [
