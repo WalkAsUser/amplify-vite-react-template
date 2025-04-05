@@ -20,7 +20,7 @@ const schema = a.schema({
 
     ///USERS TABLE- No Edit from USER ///
     DWUser: a.model({
-        dwuserId: a.id().required(),
+        dwUserId: a.id().required(),
         firstName: a.string(),
         lastName: a.string(),
         email: a.string(),
@@ -30,7 +30,7 @@ const schema = a.schema({
         expires: a.datetime(),
         groupName: a.string(),
         /// RELATIONSHIPS ///
-        customers: a.hasMany('Customer','userId')
+        customers: a.hasMany('Customer','dwUserId')
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
@@ -50,7 +50,6 @@ const schema = a.schema({
     ///INVOICE TABLE///
     Invoice: a.model({
         invoiceId: a.id(),
-
         invoiceNumber: a.integer().required(),
         invoiceStatus: a.enum(["Estimate","Paid","Outstanding"]),
         group: a.string(),
