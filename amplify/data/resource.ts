@@ -20,6 +20,7 @@ const schema = a.schema({
 
     ///USERS TABLE- No Edit from USER ///
     DWUser: a.model({
+        dwuserId: a.id().required(),
         firstName: a.string(),
         lastName: a.string(),
         email: a.string(),
@@ -28,12 +29,18 @@ const schema = a.schema({
         dateCreated: a.datetime(),
         expires: a.datetime(),
         groupName: a.string(),
+        /// RELATIONSHIPS ///
+        customers: a.hasMany('Customer','userId')
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
+
     ///CUSTOMERS TABLE///
     Customer: a.model({
         customerId: a.id(),
+        dwUserId: a.id(),
+        //RELATIONSHIPS//
+        dwUser: a.hasOne('DWUser','dwUserId'),
         invoices : a.hasMany('Invoice','invoiceId'),
     }).authorization(allow => [
         allow.owner(),
@@ -43,23 +50,16 @@ const schema = a.schema({
     ///INVOICE TABLE///
     Invoice: a.model({
         invoiceId: a.id(),
-        customer: a.belongsTo('Customer', 'invoiceId'),
+
         invoiceNumber: a.integer().required(),
         invoiceStatus: a.enum(["Estimate","Paid","Outstanding"]),
-
+        group: a.string(),
+        //RELATIONSHIPS//
+        customer: a.belongsTo('Customer', 'invoiceId'),
     }).authorization(allow => [
         allow.owner(),
         allow.groupDefinedIn('group'),
     ]),
-///Trying to change the ID field///
-    TestForId: a.model({
-        testForId: a.id().required(),
-        shootForTheMoon: a.string(),
-    })//.identifier(["testForId"])
-        .authorization(allow => [
-            allow.owner(),
-            //allow.groupDefinedIn('group'),
-        ]),
 
 ///***///
 
