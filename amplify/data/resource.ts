@@ -31,7 +31,7 @@ const schema = a.schema({
         groupName: a.string(),
         /// RELATIONSHIPS ///
         customers: a.hasMany('Customer','customerId'),
-        invoices: a.hasMany('Invoice', 'dwUserId')
+        invoices: a.hasMany('Invoice', 'invoiceId'),
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
@@ -55,7 +55,7 @@ const schema = a.schema({
         group: a.string(),
         //RELATIONSHIPS//
         customer: a.belongsTo('Customer', 'invoiceId'),
-        dwUser: a.belongsTo('DWUser','dwUserId'),
+        dwUser: a.belongsTo('DWUser','invoiceId'),
     }).authorization(allow => [
         allow.owner(),
         allow.groupDefinedIn('group'),
