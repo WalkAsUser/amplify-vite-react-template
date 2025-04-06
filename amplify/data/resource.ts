@@ -20,7 +20,7 @@ const schema = a.schema({
 
     ///USERS TABLE- No Edit from USER ///
     DWUser: a.model({
-        dwUserId: a.id(),
+       // dwUserId: a.id(),
         firstName: a.string(),
         lastName: a.string(),
         email: a.string(),
@@ -30,7 +30,8 @@ const schema = a.schema({
         expires: a.datetime(),
         groupName: a.string(),
         /// RELATIONSHIPS ///
-        customers: a.hasMany('Customer','dwUserId')
+        customers: a.hasMany('Customer','customerId'),
+        invoices: a.hasMany('Invoice', 'dwUserId')
     }).authorization(allow => [
         allow.owner().to(['read']),
     ]),
@@ -38,9 +39,8 @@ const schema = a.schema({
     ///CUSTOMERS TABLE///
     Customer: a.model({
         customerId: a.id(),
-        dwUserId: a.id(),
         //RELATIONSHIPS//
-        dwUser: a.belongsTo('DWUser','dwUserId'),
+        dwUser: a.belongsTo('DWUser','customerId'),
         invoices : a.hasMany('Invoice','invoiceId'),
     }).authorization(allow => [
         allow.owner(),
@@ -55,6 +55,7 @@ const schema = a.schema({
         group: a.string(),
         //RELATIONSHIPS//
         customer: a.belongsTo('Customer', 'invoiceId'),
+        dwUser: a.belongsTo('DWUser','dwUserId'),
     }).authorization(allow => [
         allow.owner(),
         allow.groupDefinedIn('group'),
