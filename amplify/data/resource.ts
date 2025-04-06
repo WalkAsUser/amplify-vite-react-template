@@ -56,11 +56,32 @@ const schema = a.schema({
         //RELATIONSHIPS//
         customer: a.belongsTo('Customer', 'invoiceId'),
         dwUser: a.belongsTo('DWUser','invoiceId'),
+        vehicles: a.hasMany('Vehicle','vehicleId'),
     }).authorization(allow => [
         allow.owner(),
         allow.groupDefinedIn('group'),
     ]),
 
+    Vehicle: a.model({
+        vehicleId: a.id(),
+        group: a.string(),
+        //RELATIONSHIPS//
+        invoice: a.belongsTo('Invoice', 'vehicleId'),
+        dents: a.hasMany('Dent','dentId'),
+    }).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
+    Dent: a.model({
+        dentId: a.id(),
+        group: a.string(),
+        //RELATIONSHIPS//
+        vehicle: a.belongsTo('Vehicle', 'dentId'),
+
+    }).authorization(allow => [
+        allow.owner(),
+        allow.groupDefinedIn('group'),
+    ]),
 ///***///
 
 });
